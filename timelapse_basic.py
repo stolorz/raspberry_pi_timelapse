@@ -13,6 +13,10 @@ camera.rotation = 180
 #camera.start_preview()
 time.sleep(2)
 
+iso = 1
+
 while True:
-    camera.capture('/home/pi/Sync/timelapse/' + time.strftime("%Y%m%d-%H%M%S") + '.jpg' )
+    camera.iso = iso
+    camera.capture('/home/pi/Sync/timelapse/' + time.strftime("%Y%m%d-%H%M%S") + '_iso_'+iso+'.jpg' )
+    iso *=2
     time.sleep(interval)
