@@ -1,19 +1,25 @@
-#import libraries
-from picamera import PiCamera
 import time
+from picamera2 import Picamera2, Preview
 
-#Set up variables:
+picam = Picamera2()
+
+config = picam.create_preview_configuration()
+picam.configure(config)
+
+#picam.start_preview(Preview.QTGL)
+
 interval = 15 
 frame = 0
 
-#Set up & start camera, & let it settle
-camera = PiCamera()
-camera.resolution = (4056, 3040)
-#camera.start_preview()
+picam.start()
 time.sleep(2)
+picam.capture_file("test-python.jpg")
 
 while True:
-        camera.capture('/home/pi/Sync/timelapse/ice_%04d.jpg' % (frame))
+        picam.capture_file('/home/pi/Sync/timelapse/ice_%04d.jpg' % (frame))
         frame = frame + 1
         time.sleep(interval)
-  
+
+picam.close()
+
+
