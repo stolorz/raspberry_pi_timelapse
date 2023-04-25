@@ -10,9 +10,13 @@ output_folder = '/home/pi/Sync/timelapse/'
 #Set up & start camera, & let it settle
 camera = PiCamera()
 camera.resolution = (4056, 3040)
-camera.rotation = 180
+camera.hflip = True
+camera.vflip = True
+camera.awb_mode = "sunlight"
+
 #camera.start_preview()
 time.sleep(2)
+
 
 iso = 1
 
