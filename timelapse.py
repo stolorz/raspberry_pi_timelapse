@@ -16,10 +16,11 @@ output_folder = '/home/pi/Sync/timelapse'
 camera = PiCamera()
 PiCamera.CAPTURE_TIMEOUT = 600 # seconds
 camera.resolution = (4056, 3040)
+camera.led = False # make sure that led is off
 camera.hflip = True
 camera.vflip = True
 camera.awb_mode = "sunlight"
-#camera.image_effect = "none"
+camera.image_effect = "none"
 #camera.shutter_speed = 6000000
 #camera.sensor_mode=3
 #camera.exposure_mode = 'off'
@@ -27,7 +28,8 @@ camera.exposure_mode = "verylong"
 #camera.shutter_speed = 6000000
 camera.framerate = Fraction(1,500)
 camera.iso = 100
-
+camera.sensor_mode = 3
+camera.meter_mode = 'matrix' # when tested in trier, this gave best results
 time.sleep(2)
 
 
