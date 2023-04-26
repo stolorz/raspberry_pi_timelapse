@@ -28,6 +28,10 @@ done
 #disable autofocus
 v4l2-ctl -d /dev/video0 -c focus_auto=0
 v4l2-ctl -d /dev/video0 -c focus_absolute=35
+v4l2-ctl -d /dev/video0 --list-formats-ext
+v4l2-ctl -d /dev/video0 --list-ctrls
+fswebcam --device V4L2:/dev/video0 --input 0 --list-controls
+
 
 # start timelapse loop
 fswebcam \
