@@ -35,13 +35,13 @@ camera.iso = 100
 time.sleep(2)
 
 
-for filename in camera.capture_continuous('/tmp/{timestamp:%Y%m%d_%H%M%S}.jpg', quality=85):
+for filename in camera.capture_continuous('/tmp/{timestamp:%Y-%m-%d_%H-%M-%S}.jpg', quality=85):
     print('Captured %s' % filename)
     print(os.path.basename(filename))
     filename_out = "{folder}/{file}".format(folder=output_folder, file=os.path.basename(filename))
     cmd = "convert {f1} -quality 85 {f2} && rm {f1}".format(f1=filename, f2=filename_out)
     subprocess.run(cmd, shell=True)
-    time.sleep(10)
+    time.sleep(1)
 
 
 #while True:
