@@ -20,12 +20,8 @@ camera.hflip = True
 camera.vflip = True
 camera.awb_mode = "sunlight"
 #camera.image_effect = "none"
-
 #camera.shutter_speed = 6000000
-#camera.framerate = Fraction(1,6)
-
 #camera.sensor_mode=3
-
 #camera.exposure_mode = 'off'
 camera.exposure_mode = "verylong"
 #camera.shutter_speed = 6000000
@@ -41,7 +37,7 @@ for filename in camera.capture_continuous('/tmp/{timestamp:%Y-%m-%d_%H-%M-%S}.jp
     filename_out = "{folder}/{file}".format(folder=output_folder, file=os.path.basename(filename))
     cmd = "convert {f1} -quality 85 {f2} && rm {f1}".format(f1=filename, f2=filename_out)
     subprocess.run(cmd, shell=True)
-    time.sleep(1)
+    time.sleep(interval)
 
 
 #while True:
