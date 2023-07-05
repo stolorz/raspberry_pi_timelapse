@@ -8,8 +8,18 @@ import os
 import pathlib
 
 
+def is_between(datetime, time_range):
+    time_str = time.strftime("%H:%M:%S", datetime)
+    if time_range[1] < time_range[0]:
+        return time_str >= time_range[0] or time_str <= time_range[1]
+    return time_range[0] <= time_str <= time_range[1]
+
+def is_night():
+    return is_between(time.localtime(), ("22:00:00", "02:00:00"))
+
 #Set up variables:
-interval = 1
+sleep_interval_day = 1
+sleep_interval_night = 300
 output_folder_base = '/home/pi/Sync/timelapse'
 
 
@@ -40,7 +50,8 @@ for filename in camera.capture_continuous('/tmp/{timestamp:%Y-%m-%d_%H-%M-%S}.jp
     filename_out = "{folder}/{file}".format(folder=output_folder, file=os.path.basename(filename))
     cmd = "convert {f1} -quality 85 {f2} && rm {f1}".format(f1=filename, f2=filename_out)
     subprocess.run(cmd, shell=True)
-    time.sleep(interval)
+    sleep_interval = sleep_interval_night if is_night() else sleep_interval_day
+    time.sleep(sleep_interval)
 
 
 #while True:
